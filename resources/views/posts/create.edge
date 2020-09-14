@@ -1,0 +1,44 @@
+@layout('layouts/default')
+
+@section('content')
+<div class="box content">
+    <form action="{{ route('posts.store') }}" method="POST">
+        {{ csrfField() }}
+        <div class="field">
+            <div class="control">
+                <label for="" class="label">Post title</label>
+                <input class="input is-large{{ hasErrorFor('title')? ' is-danger':'' }}" type="text" name="title" placeholder="e.g. How I can build forum with adonis js" autofocus value="{{ old('title','') }}">
+                @if(hasErrorFor('title'))
+                    <p class="help is-danger has-text-left">{{ getErrorFor('title') }}</p>
+                @endif
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <label for="" class="label">Choose a tag</label>
+                <div class="select is-fullwidth{{ hasErrorFor('tag')? ' is-danger':'' }}">
+                    <select name="tag" id="">
+                        @each(tag in tags.toJSON())
+                            <option value="{{ tag.id }}">{{ tag.name }}</option>
+                        @endeach
+                    </select>
+                </div>
+                @if(hasErrorFor('tag'))
+                    <p class="help is-danger has-text-left">{{ getErrorFor('tag') }}</p>
+                @endif
+            </div>
+        </div>
+        <div class="field">
+            <div class="control">
+                <label for="" class="label">Post body</label>
+                <textarea class="textarea{{ hasErrorFor('body')? ' is-danger':'' }}"  name="body" >{{ old('body','') }}</textarea>
+                @if(hasErrorFor('body'))
+                    <p class="help is-danger has-text-left">{{ getErrorFor('body') }}</p>
+                @endif
+            </div>
+        </div>
+        <button class="button is-info">Post</button>
+    </form>
+</div>
+
+@endsection
