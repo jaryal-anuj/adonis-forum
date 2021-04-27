@@ -5,7 +5,7 @@ const Schema = use('Schema')
 
 class AddFulltextToPostsSchema extends Schema {
   up () {
-	this.raw('ALTER TABLE posts ADD FULLTEXT(`title`,`body`)')
+	//this.raw('ALTER TABLE posts ADD FULLTEXT(`title`,`body`)')
   }
 
   down () {
